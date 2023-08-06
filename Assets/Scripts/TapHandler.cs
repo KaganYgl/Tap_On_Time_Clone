@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class Tap_Handler : MonoBehaviour
+public class TapHandler : MonoBehaviour
 {
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (Collision_Handler.IsColliding())
+            if (CollisionHandler.IsColliding())
             {
                 Debug.Log("success");
             }

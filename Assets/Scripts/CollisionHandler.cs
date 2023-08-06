@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Collision_Handler : MonoBehaviour
+public class CollisionHandler : MonoBehaviour
 {
     private static bool CollisionState = false;
 
