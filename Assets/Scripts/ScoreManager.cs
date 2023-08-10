@@ -3,27 +3,27 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    private int Score=0;
-    [SerializeField] private TextMeshProUGUI highScore;
-    [SerializeField] private TextMeshProUGUI score;
+    private int score=0;
+    [SerializeField] private TextMeshProUGUI highScoreText;
+    [SerializeField] private TextMeshProUGUI scoreText;
 
     public void Start()
     {
-        highScore.text = "Best\n" + PlayerPrefs.GetInt("HighScore").ToString();
+        highScoreText.text = "Best\n" + PlayerPrefs.GetInt("HighScore").ToString();
     }
 
     public void IncreaseScore()
     {
-        Score += 1;
-        score.text = Score.ToString();
+        score += 1;
+        scoreText.text = score.ToString();
     }
 
     public void IncreaseHighScore()
     {
-        if (Score > PlayerPrefs.GetInt("HighScore"))
+        if (score > PlayerPrefs.GetInt("HighScore"))
         {
-            PlayerPrefs.SetInt("HighScore", Score);
-            highScore.text = "Best\n" + PlayerPrefs.GetInt("HighScore").ToString();
+            PlayerPrefs.SetInt("HighScore", score);
+            highScoreText.text = "Best\n" + PlayerPrefs.GetInt("HighScore").ToString();
             PlayerPrefs.Save();
         }
     }

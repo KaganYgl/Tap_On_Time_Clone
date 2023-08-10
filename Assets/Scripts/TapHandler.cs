@@ -2,22 +2,30 @@ using UnityEngine;
 
 public class TapHandler : MonoBehaviour
 {
+    [SerializeField] private CollisionHandler collisionHandler;
     [SerializeField] private Spawner spawner;
     [SerializeField] private ScoreManager scoreManager;
+    [SerializeField] private GameOverManager gameOverManager;
+    [SerializeField] private MainMenuManager mainMenuManager;
+
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!gameOverManager.IsGameOver() && mainMenuManager.IsGameStarted())
         {
-            if (CollisionHandler.IsColliding())
+            if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("success");
-                scoreManager.IncreaseScore();
-                scoreManager.IncreaseHighScore();
-                spawner.Spawn();
-            }
-            else
-            {
-                Debug.Log("Fail");
+                if (collisionHandler.IsColliding())
+                {
+                    Debug.Log("success");
+                    scoreManager.IncreaseScore();
+                    scoreManager.IncreaseHighScore();
+                    spawner.Spawn();
+                }
+                else
+                {
+                    Debug.Log("Fail");
+                    gameOverManager.SetGameOver();
+                }
             }
         }
     }

@@ -174,3 +174,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a6f3e5af99d824796c8163d3c97174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionHandler: {fileID: 7683461295280386398}
+  spawner: {fileID: 0}
+  scoreManager: {fileID: 0}
+  gameOverPanel: {fileID: 0}
+  rotator: {fileID: 4440268787171764520}

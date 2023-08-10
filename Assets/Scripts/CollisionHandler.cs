@@ -2,19 +2,20 @@ using UnityEngine;
 
 public class CollisionHandler : MonoBehaviour
 {
-    private static bool CollisionState = false;
-
-    public static bool IsColliding()
+    private bool collisionState = false;
+    
+    public bool IsColliding()
     {
-        return CollisionState;
+        return collisionState;
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        CollisionState = true;
+        collisionState = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        CollisionState = false;
+        collisionState = false;
     }
 }
