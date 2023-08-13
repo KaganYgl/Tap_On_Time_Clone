@@ -4,8 +4,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    private GameState state;
-    private static Action<GameState> OnGameStateChanged;
+    private GameState state = GameState.Default;
+    public static Action<GameState> OnGameStateChanged;
 
     void Awake()
     {
@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        UpdateGameState(GameState.TapToStart);
+        UpdateGameState(GameState.MainMenu);
     }
 
     public void UpdateGameState(GameState newState)
@@ -23,14 +23,14 @@ public class GameManager : MonoBehaviour
 
         switch (newState)
         {
-            case GameState.TapToStart:
-                
+            case GameState.MainMenu:
+                Time.timeScale = 0.3f;
                 break;
-            case GameState.Game:
-                
+            case GameState.Gameplay:
+                Time.timeScale = 1;
                 break;
-            case GameState.Lose:
-                
+            case GameState.GameOver:
+                Time.timeScale = 0;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -38,11 +38,13 @@ public class GameManager : MonoBehaviour
 
         OnGameStateChanged?.Invoke(newState);
     }
+
 }
 
 public enum GameState
 {
-    TapToStart,
-    Game,
-    Lose
+    Default = 0,
+    MainMenu,
+    Gameplay,
+    GameOver
 }

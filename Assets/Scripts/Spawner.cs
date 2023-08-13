@@ -6,14 +6,15 @@ public class Spawner : MonoBehaviour
 
     public void Spawn()
     {
-        System.Random rnd = new();
-        int i = rnd.Next(0,3);
-        int degrees = rnd.Next(1,12) * 30;
+        int i = UnityEngine.Random.Range(0, 4);
+        int degrees = UnityEngine.Random.Range(1, 12) * 30;
+
         foreach (GameObject t in tapLocations)
         {
             t.SetActive(false);
         }
-        tapLocations[i].transform.rotation = Quaternion.Euler(Vector3.forward * degrees);
+
+        tapLocations[i].transform.rotation = Quaternion.Euler((Vector3.forward * degrees) + tapLocations[i].transform.rotation.eulerAngles);
         tapLocations[i].SetActive(true);
     }
 }

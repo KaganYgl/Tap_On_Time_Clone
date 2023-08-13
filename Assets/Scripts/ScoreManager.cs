@@ -3,13 +3,15 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    private int score=0;
+    private int score;
+    private int highScore;
     [SerializeField] private TextMeshProUGUI highScoreText;
     [SerializeField] private TextMeshProUGUI scoreText;
 
     public void Start()
-    {
-        highScoreText.text = "Best\n" + PlayerPrefs.GetInt("HighScore").ToString();
+    {   score = 0;
+        highScore = PlayerPrefs.GetInt("HighScore");
+        highScoreText.text = "Best\n" + highScore.ToString();
     }
 
     public void IncreaseScore()
@@ -20,11 +22,16 @@ public class ScoreManager : MonoBehaviour
 
     public void IncreaseHighScore()
     {
-        if (score > PlayerPrefs.GetInt("HighScore"))
+        if (score > highScore)
         {
-            PlayerPrefs.SetInt("HighScore", score);
-            highScoreText.text = "Best\n" + PlayerPrefs.GetInt("HighScore").ToString();
-            PlayerPrefs.Save();
+            highScore = score;
+            highScoreText.text = "Best\n" + highScore.ToString();
         }
+    }
+
+    private void OnDestroy()
+    {
+        PlayerPrefs.SetInt("HighScore", highScore);
+        PlayerPrefs.Save();
     }
 }
